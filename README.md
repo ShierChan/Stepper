@@ -1,7 +1,7 @@
 # Stepper
 ------
 
-A macOS application to memorize words.
+A macOS application to memorize JLPT words.
 
 ### ScreenShot
 
