@@ -7,6 +7,6 @@ A macOS application to memorize words.
 
 ------
 
-![screen_shot_1](/Users/shierchan/Desktop/screen_shot_1.png)
+![screen_shot_1](assets/read_me/screen_shot_1.png)
 
-![screen_shot_2](/Users/shierchan/Desktop/screen_shot_2.png)
+![screen_shot_2](assets/read_me/screen_shot_2.png)
