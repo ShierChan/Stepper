@@ -16,26 +16,28 @@ import 'package:flutter/material.dart';
 class GlobalTheme {
   static final Color _lightFocusColor = Colors.black.withOpacity(0.12);
   static final Color _darkFocusColor = Colors.white.withOpacity(0.12);
-  static ThemeData themeData(ColorScheme colorScheme, Color focusColor) {
+  static ThemeData themeData(
+      ColorScheme colorScheme, Color focusColor, Color textColor) {
     return ThemeData(
         colorScheme: colorScheme,
         canvasColor: colorScheme.surface,
         scaffoldBackgroundColor: colorScheme.surface,
         highlightColor: Colors.transparent,
         focusColor: focusColor,
-        textTheme: const TextTheme(
-          bodyLarge: TextStyle(color: Colors.white),
-          bodyMedium: TextStyle(color: Colors.white),
-          titleLarge: TextStyle(color: Colors.white),
-          displayLarge: TextStyle(color: Colors.white),
-          displayMedium: TextStyle(color: Colors.white),
-          displaySmall: TextStyle(color: Colors.white),
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(color: textColor),
+          bodyMedium: TextStyle(color: textColor),
+          titleLarge: TextStyle(color: textColor),
+          displayLarge: TextStyle(color: textColor),
+          displayMedium: TextStyle(color: textColor),
+          displaySmall: TextStyle(color: textColor),
         ));
   }
 
   static ThemeData lightThemeData =
-      themeData(lightColorScheme, _lightFocusColor);
-  static ThemeData darkThemeData = themeData(darkColorScheme, _darkFocusColor);
+      themeData(lightColorScheme, _lightFocusColor, Colors.black);
+  static ThemeData darkThemeData =
+      themeData(darkColorScheme, _darkFocusColor, Colors.white);
 
   static const ColorScheme darkColorScheme = ColorScheme(
     primary: Color(0xFFFF8383),
@@ -49,14 +51,14 @@ class GlobalTheme {
     brightness: Brightness.dark,
   );
   static const ColorScheme lightColorScheme = ColorScheme(
-    primary: Color(0xFFB93C5D),
-    onPrimary: Colors.black,
-    secondary: Color(0xFFEFF3F3),
-    onSecondary: Color(0xFF322942),
+    primary: Color(0xFFFF8383),
+    secondary: Color(0xFFEEEED1),
+    surface: Colors.white,
+    onSurface: Color(0xFFFDF5E6),
     error: Colors.redAccent,
     onError: Colors.white,
-    surface: Color(0xFFFAFBFB),
-    onSurface: Color(0xFF241E30),
+    onPrimary: Color(0xFF2f2f48),
+    onSecondary: Color(0xFF2f2f48),
     brightness: Brightness.light,
   );
   static Color containerColor = const Color(0xFF2f2f48);
