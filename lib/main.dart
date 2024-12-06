@@ -159,6 +159,7 @@ class _StepperRootState extends State<StepperRoot> {
                 Container(
                   height: MediaQuery.of(context).size.height - 170,
                   width: MediaQuery.of(context).size.width - 120,
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.onSurface,
                       borderRadius: BorderRadius.circular(40)),
@@ -167,13 +168,13 @@ class _StepperRootState extends State<StepperRoot> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(step >= 0 ? tanGoList[step].pronunciation : "",
-                          style: Theme.of(context).textTheme.displayMedium),
+                          style: Theme.of(context).textTheme.headlineMedium),
                       Text(
                         step >= 0 ? tanGoList[step].word : "",
-                        style: Theme.of(context).textTheme.displayLarge,
+                        style: Theme.of(context).textTheme.displayMedium,
                       ),
                       Text(step >= 0 ? tanGoList[step].meaning : "",
-                          style: Theme.of(context).textTheme.displaySmall),
+                          style: Theme.of(context).textTheme.bodyLarge),
                     ],
                   )),
                 ),

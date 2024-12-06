@@ -31,6 +31,7 @@ class GlobalTheme {
           displayLarge: TextStyle(color: textColor),
           displayMedium: TextStyle(color: textColor),
           displaySmall: TextStyle(color: textColor),
+          headlineMedium: TextStyle(color: textColor),
         ));
   }
 
