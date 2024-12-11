@@ -24,6 +24,7 @@ class GlobalTheme {
         scaffoldBackgroundColor: colorScheme.surface,
         highlightColor: Colors.transparent,
         focusColor: focusColor,
+        splashColor: Colors.blueAccent, // 控制水滴纹颜色
         textTheme: TextTheme(
           bodyLarge: TextStyle(color: textColor),
           bodyMedium: TextStyle(color: textColor),
@@ -42,7 +43,7 @@ class GlobalTheme {
 
   static const ColorScheme darkColorScheme = ColorScheme(
     primary: Color(0xFFFF8383),
-    secondary: Color(0xFFD3DDE4),
+    secondary: Color(0xFF46466b),
     surface: Color(0xFF2f2f48),
     onSurface: Color(0x0DFFFFFF),
     error: Colors.redAccent,

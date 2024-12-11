@@ -38,7 +38,7 @@ class _StepperRootState extends State<StepperRoot> {
         width: double.infinity,
         height: MediaQuery.of(context).size.height,
         child: Center(
-          child: Row(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               GestureDetector(
@@ -73,7 +73,7 @@ class _StepperRootState extends State<StepperRoot> {
                   );
                 },
               ),
-              const Padding(padding: EdgeInsets.only(left: 20)),
+              const Padding(padding: EdgeInsets.only(top: 20)),
               GestureDetector(
                 child: ClipOval(
                   child: Container(

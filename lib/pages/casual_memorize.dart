@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stepper/data.dart';
+import 'package:stepper/widgets/normal_widgets.dart';
 
 class CasualMemorize extends StatefulWidget {
   const CasualMemorize({super.key});
@@ -19,8 +21,10 @@ class CasualMemorizeState extends State<CasualMemorize> {
   int step = -1;
   String level = "N5";
   static List<String> levelList = ["N1", "N2", "N3", "N4", "N5", "all"];
-
   List<dynamic> jsonArray = []; // 存储 JSON 数组
+
+  bool isPronunciationAndMeaningVisible = false;
+
   // 读取 JSON 数组
   Future<void> loadJsonArray() async {
     try {
@@ -88,7 +92,6 @@ class CasualMemorizeState extends State<CasualMemorize> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SizedBox(
         width: double.infinity,
         height: MediaQuery.of(context).size.height,
@@ -103,6 +106,7 @@ class CasualMemorizeState extends State<CasualMemorize> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
+                  hoverColor: Theme.of(context).colorScheme.onSurface,
                 ),
                 const Padding(padding: EdgeInsets.only(left: 5)),
                 GestureDetector(
@@ -128,6 +132,22 @@ class CasualMemorizeState extends State<CasualMemorize> {
                     );
                   },
                 ),
+                const Padding(padding: EdgeInsets.only(left: 5)),
+                IconButton(
+                  icon: Icon(
+                    isPronunciationAndMeaningVisible
+                        ? CupertinoIcons.eye_fill
+                        : CupertinoIcons.eye_slash_fill,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      isPronunciationAndMeaningVisible =
+                          !isPronunciationAndMeaningVisible;
+                    });
+                  },
+                  hoverColor: Theme.of(context).colorScheme.onSurface,
+                ),
               ],
             ),
             const Padding(padding: EdgeInsets.only(top: 20)),
@@ -144,8 +164,7 @@ class CasualMemorizeState extends State<CasualMemorize> {
                           })
                         : null;
                   },
-                  splashColor: Colors.transparent, // 去除水滴纹
-                  highlightColor: Colors.transparent, // 去除高亮色
+                  hoverColor: Theme.of(context).colorScheme.onSurface,
                 ),
                 const Padding(padding: EdgeInsets.only(left: 4)),
                 Container(
@@ -159,15 +178,21 @@ class CasualMemorizeState extends State<CasualMemorize> {
                       child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(step >= 0 ? tanGoList[step].pronunciation : "",
-                          style: Theme.of(context).textTheme.headlineMedium),
+                      FlexibleBlurContainer(
+                          alwaysVisible: isPronunciationAndMeaningVisible,
+                          child: Text(
+                              step >= 0 ? tanGoList[step].pronunciation : "",
+                              style:
+                                  Theme.of(context).textTheme.headlineMedium)),
                       Text(
                         step >= 0 ? tanGoList[step].word : "",
                         style: Theme.of(context).textTheme.displayMedium,
                       ),
-                      Text(step >= 0 ? tanGoList[step].meaning : "",
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyLarge),
+                      FlexibleBlurContainer(
+                          alwaysVisible: isPronunciationAndMeaningVisible,
+                          child: Text(step >= 0 ? tanGoList[step].meaning : "",
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyLarge)),
                     ],
                   )),
                 ),
@@ -180,6 +205,7 @@ class CasualMemorizeState extends State<CasualMemorize> {
                       pickRandomTanGoAndStep();
                     });
                   },
+                  hoverColor: Theme.of(context).colorScheme.onSurface,
                 )
               ],
             )
