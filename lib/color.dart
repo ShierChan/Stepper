@@ -49,7 +49,7 @@ class GlobalTheme {
     error: Colors.redAccent,
     onError: Colors.white,
     onPrimary: Color(0xFF2f2f48),
-    onSecondary: Color(0xFF2f2f48),
+    onSecondary: Colors.white,
     brightness: Brightness.dark,
   );
   static const ColorScheme lightColorScheme = ColorScheme(
@@ -60,7 +60,7 @@ class GlobalTheme {
     error: Colors.redAccent,
     onError: Colors.white,
     onPrimary: Color(0xFF2f2f48),
-    onSecondary: Color(0xFF2f2f48),
+    onSecondary: Colors.black,
     brightness: Brightness.light,
   );
   static Color containerColor = const Color(0xFF2f2f48);

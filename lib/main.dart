@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stepper/color.dart';
 import 'package:stepper/pages/casual_memorize.dart';
+import 'package:stepper/pages/paint_steps.dart';
 import 'package:stepper/pages/step_memorize.dart';
 
 void main() {
@@ -100,7 +101,7 @@ class _StepperRootState extends State<StepperRoot> {
                       pageBuilder: (BuildContext context,
                           Animation<double> animation,
                           Animation<double> secondaryAnimation) {
-                        return const StepMemorize();
+                        return const PaintSteps();
                       },
                     ),
                   );

@@ -1,11 +1,5 @@
-import 'dart:convert';
-import 'dart:math';
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:stepper/data.dart';
 import 'package:stepper/widgets/normal_widgets.dart';
 
@@ -21,41 +15,21 @@ class CasualMemorizeState extends State<CasualMemorize> {
   int step = -1;
   String level = "N5";
   static List<String> levelList = ["N1", "N2", "N3", "N4", "N5", "all"];
-  List<dynamic> jsonArray = []; // 存储 JSON 数组
 
   bool isPronunciationAndMeaningVisible = false;
-
-  // 读取 JSON 数组
-  Future<void> loadJsonArray() async {
-    try {
-      String jsonString =
-          await rootBundle.loadString('assets/japanese/jlpt/$level.json');
-      setState(() {
-        jsonArray = json.decode(jsonString); // 解析为 List
-      });
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error loading JSON: $e');
-      }
-    }
-  }
-
-  // 随机抽取一个 単語 ,并前进一步
-  void pickRandomTanGoAndStep() {
-    if (jsonArray.isNotEmpty) {
-      Random random = Random();
-      int randomIndex = random.nextInt(jsonArray.length);
-      setState(() {
-        tanGoList.add(TanGo.fromJson(jsonArray[randomIndex]));
-        step++;
-      });
-    }
-  }
 
   @override
   initState() {
     super.initState();
-    loadJsonArray().then((value) => pickRandomTanGoAndStep());
+    tanGoList.loadJsonArray(level).then(
+          (value) => tanGoList.pickRandomTanGo().then(
+                (_) => setState(
+                  () {
+                    step++;
+                  },
+                ),
+              ),
+        );
   }
 
   void showPicker() {
@@ -75,9 +49,15 @@ class CasualMemorizeState extends State<CasualMemorize> {
                           step = -1;
                           tanGoList.clear();
                           this.level = level;
-                          loadJsonArray().then((value) {
-                            pickRandomTanGoAndStep();
-                          });
+                          tanGoList.loadJsonArray(level).then(
+                                (value) => tanGoList.pickRandomTanGo().then(
+                                      (_) => setState(
+                                        () {
+                                          step++;
+                                        },
+                                      ),
+                                    ),
+                              );
                         });
                       }
                       Navigator.of(context).pop();
@@ -202,7 +182,13 @@ class CasualMemorizeState extends State<CasualMemorize> {
                       size: 40, color: Theme.of(context).colorScheme.secondary),
                   onPressed: () {
                     setState(() {
-                      pickRandomTanGoAndStep();
+                      tanGoList.pickRandomTanGo().then(
+                            (_) => setState(
+                              () {
+                                step++;
+                              },
+                            ),
+                          );
                     });
                   },
                   hoverColor: Theme.of(context).colorScheme.onSurface,
